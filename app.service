@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance to serve python-sandbox
+After=network.target
+
+[Service]
+User=sana256
+Group=www-data
+WorkingDirectory=/home/sana256/python-sandbox
+
+Environment="MONGO_SRV_STRING=mongodb+srv://dbUser:um3pVHvDSRAmDN5D@cluster0-xwxug.mongodb.net/test?retryWrites=true&w=majority"
+Environment="PATH=/home/sana256/python-sandbox/venv/bin"
+ExecStart=/home/sana256/python-sandbox/venv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
