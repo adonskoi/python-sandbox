@@ -13,6 +13,18 @@ def hello():
     return "hello from sandbox"
 
 
+@sandbox.route('/add')
+def add():
+    db.users.insert_one({"name": "Aleksandr"})
+    return "success"
+
+
+@sandbox.route('/get')
+def get():
+    user = db.users.find_one()
+    return user["name"]
+
+
 @sandbox.route('/doc')
 def _():
     name = create_doc()
